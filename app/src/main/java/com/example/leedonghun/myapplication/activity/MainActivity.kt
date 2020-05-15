@@ -21,28 +21,36 @@ mvvm 을  이용한  리사이클러뷰 이미지 프로필과 이름 넣기 프
 */
 class MainActivity : AppCompatActivity() {
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var mainActivityViewModel:MainActivityViewModel =  ViewModelProvider(this@MainActivity)[MainActivityViewModel::class.java]
+        var madapter=RecyclerAdapter(this@MainActivity, mainActivityViewModel.getNicePlaces().value as? ArrayList<NicePlace> ?:return)//리사이클러뷰 어뎁터
+        var layoutManager=LinearLayoutManager(this@MainActivity)//리니어 레이아웃 메니져
 
 
-        val mainActivityViewModel:MainActivityViewModel =  ViewModelProvider(this@MainActivity)[MainActivityViewModel::class.java]
-        mainActivityViewModel.getNicePlaces().observe(this@MainActivity, Observer {  })
+        mainActivityViewModel.init()
 
 
+        mainActivityViewModel.getNicePlaces().observe(this@MainActivity, Observer {
 
-        initRecycelerView()
+            madapter.notifyDataSetChanged()
+
+        })
+
+        initRecycelerView(layoutManager,madapter)
 
 
     }//onCreate()끝
 
     //코틀린에서  public은  default여서  안써도 됨.
     //Unit  코틀린에서는  이게  자바의 void 역할
-    private fun initRecycelerView() : Unit{
+    private fun initRecycelerView(layoutManager: LinearLayoutManager,madapter:RecyclerAdapter) : Unit{
 
-         val madapter=RecyclerAdapter(this@MainActivity,ArrayList<NicePlace>())//리사이클러뷰 어뎁터
-         val layoutManager=LinearLayoutManager(this@MainActivity)//리니어 레이아웃 메니져
          recyclerView.layoutManager=layoutManager//리사이클러뷰와 레이아웃 매니저 연결
          recyclerView.adapter=madapter//리사이클러뷰와  어뎁터 연결
          recyclerView.setHasFixedSize(true)
