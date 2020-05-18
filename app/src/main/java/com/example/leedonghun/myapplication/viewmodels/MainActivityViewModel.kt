@@ -1,6 +1,7 @@
 package com.example.leedonghun.myapplication.viewmodels
 
 import android.os.AsyncTask
+import android.os.SystemClock
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,9 +22,6 @@ class MainActivityViewModel: ViewModel() {
     private var mRepo=NiceplaceRepository.getInstance()
     private var mIsUpdating = MutableLiveData<Boolean>()
 
-
-
-
     fun init(){
 
         if(livedata !=null){
@@ -34,41 +32,27 @@ class MainActivityViewModel: ViewModel() {
             livedata=mRepo.getNicePlaces()
     }
 
+    //새로운 장소목록 추가시킨다.
     fun addnewvalue(nicePlace: NicePlace){
 
         mIsUpdating.value=true
-
-        var synctask :sync=sync(nicePlace)
-         synctask.execute()
-
 
 
     }
 
 
-   inner class sync(nicePlace: NicePlace) :AsyncTask<Void,Void,Void>(){
 
-
-
-       override fun doInBackground(vararg params: Void?): Void {
-           TODO("Not yet implemented")
-       }
-
-       override fun onPostExecute(result: Void?) {
-           super.onPostExecute(result)
-            val currentplaces:List<NicePlace>? = livedata.value
-           //currentplaces.get()
-
-
-
-       }
-   }
-
-
-
+    // 현재 장소 목록
     fun getNicePlaces():LiveData<List<NicePlace>>{
 
         return  livedata
+    }
+
+
+    //뷰가  업데이트 함을  boolean 값으로 알림
+    fun getIsUpdating():LiveData<Boolean>{
+
+        return mIsUpdating
     }
 
 

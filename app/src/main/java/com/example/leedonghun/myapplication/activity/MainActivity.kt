@@ -42,6 +42,33 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        //새로운 데이터  추가 시키는 옵져버
+        mainActivityViewModel.getIsUpdating().observe(this@MainActivity, Observer {
+
+            if (it){//truen일떄
+
+                showProgress()//true일때  progress bar 보여주기
+
+            }else{//false일때
+
+                hideProgress()//false이므로  progress bar 숨겨준다.
+
+                //스크롤 포지션  ->  -1 로 위치하게 해준다.
+                recyclerView.smoothScrollToPosition((mainActivityViewModel.getNicePlaces().value as ArrayList<NicePlace>).size-1)
+
+            }
+        })
+
+
+        //플로팅 버튼 누르면  새로운  값 추가 시켜줘야 하므로,
+        // 클릭시  ->  값추가  로직 들어감.
+         floatingbtn.setOnClickListener {
+
+              mainActivityViewModel.addnewvalue(NicePlace("https://ifh.cc/g/MKb3Ng.png","새롭게 추가"))
+
+
+         }
+
         initRecycelerView(layoutManager,madapter)
 
 
