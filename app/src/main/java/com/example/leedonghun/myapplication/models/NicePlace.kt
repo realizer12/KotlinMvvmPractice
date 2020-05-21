@@ -14,7 +14,7 @@ package com.example.leedonghun.myapplication.models
 class NicePlace(imageUrl:String,title:String) {
 
   //리사이클러뷰 리스트 중  타이틀에 해당 되는  값.받기 위함.
-  private var title:String =""
+  var title:String =""
 
       get() = field//title  getter
 
@@ -27,7 +27,7 @@ class NicePlace(imageUrl:String,title:String) {
   }
 
   //리사이클러뷰 리스트 중  imageUrl 에  해당 되는 값 받기 위함
-  private var imageUrl:String =""
+   var imageUrl:String =""
 
 
       get() = field//imageUrl getter
