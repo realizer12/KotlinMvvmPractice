@@ -1,6 +1,6 @@
-package com.example.l
+package com.example.leedonghun.myapplication.adapters
 
-import android.system.Os.bind
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.leedonghun.myapplication.R
 import com.example.leedonghun.myapplication.models.NicePlace
+import kotlinx.android.synthetic.main.recyclerviewitem.view.*
 
 /**
  * MyApplication4
@@ -27,13 +28,13 @@ class RecyclerAdapter constructor( private val context: Context, private val dat
 
 
     //
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.niceplace_viewholer {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): niceplace_viewholer {
 
         Log.v("check_iewholder","시작됨")
 
         val inflater=LayoutInflater.from(parent.context).inflate(R.layout.recyclerviewitem,parent,false)
 
-        return RecyclerAdapter.niceplace_viewholer(inflater)
+        return niceplace_viewholer(inflater)
     }
 
     override fun getItemCount(): Int {
@@ -46,13 +47,16 @@ class RecyclerAdapter constructor( private val context: Context, private val dat
     }
 
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.niceplace_viewholer, position: Int) {
-
-        holder?.bind(data[position], context)
-        holder?.itemView?.run {
+    override fun onBindViewHolder(holder: niceplace_viewholer, position: Int) {
 
 
-        }
+        (holder as? niceplace_viewholer)?.bind(data[position],context)
+
+//        holder?.bind(data[position], context)
+//        holder?.itemView?.run {
+//
+//
+//        }
 
 
     }
@@ -69,8 +73,14 @@ class RecyclerAdapter constructor( private val context: Context, private val dat
 
        fun bind(nicePlace: NicePlace,context: Context){
 
-           title?.text=nicePlace.title
-           Glide.with(context).load(nicePlace.imageUrl).into(this.image!!)
+           itemView.run {
+
+               Glide.with(context).load(nicePlace.imageUrl).into(this.imageView_for_recyclerview)
+
+           }
+
+           //title?.text=nicePlace.title
+           //Glide.with(context).load(nicePlace.imageUrl).into(this.image!!)
 
 
        }

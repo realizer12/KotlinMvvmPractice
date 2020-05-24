@@ -7,7 +7,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.l.RecyclerAdapter
+import com.example.leedonghun.myapplication.adapters.RecyclerAdapter
 import com.example.leedonghun.myapplication.R
 import com.example.leedonghun.myapplication.models.NicePlace
 import com.example.leedonghun.myapplication.viewmodels.MainActivityViewModel
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     //코틀린에서  public은  default여서  안써도 됨.
     //Unit  코틀린에서는  이게  자바의 void 역할
-    private fun initRecycelerView(layoutManager: LinearLayoutManager,madapter:RecyclerAdapter) : Unit{
+    private fun initRecycelerView(layoutManager: LinearLayoutManager,madapter: RecyclerAdapter) : Unit{
 
         Log.v("check","initRecycelerView 실행")
 
