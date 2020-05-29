@@ -13,9 +13,14 @@ import com.example.leedonghun.myapplication.models.NicePlace
 
 class NiceplaceRepository constructor() {
 
+
+
+
     companion object{
 
         @Volatile private  var instance: NiceplaceRepository?=null
+
+         //singleton 적용됨.
         @JvmStatic fun getInstance():NiceplaceRepository=instance ?: synchronized(this) {
               instance ?: NiceplaceRepository().also {
                   instance =it

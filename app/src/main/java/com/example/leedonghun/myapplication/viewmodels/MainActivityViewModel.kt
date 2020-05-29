@@ -22,21 +22,20 @@ class MainActivityViewModel: ViewModel() {
     private var mRepo=NiceplaceRepository.getInstance()
     private var mIsUpdating = MutableLiveData<Boolean>()
 
+
+
     fun init(){
-
         if(livedata !=null){
-
             return
         }
-
-            livedata=mRepo.getNicePlaces()
+        livedata=mRepo.getNicePlaces()
     }
+
 
     //새로운 장소목록 추가시킨다.
     fun addnewvalue(nicePlace: NicePlace){
 
         mIsUpdating.value=true
-
 
     }
 
